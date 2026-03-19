@@ -6,8 +6,8 @@ Two Gradle plugins that wire up a full Android interview stack in seconds — on
 
 | Plugin ID | Apply to |
 |---|---|
-| `io.github.manu.interview-app` | The single `:app` module |
-| `io.github.manu.interview-feature` | Any `:feature-*` library module |
+| `io.github.a-manumohan.interview-app` | The single `:app` module |
+| `io.github.a-manumohan.interview-feature` | Any `:feature-*` library module |
 
 ---
 
@@ -45,7 +45,7 @@ pluginManagement {
 
 ```kotlin
 plugins {
-    id("io.github.manu.interview-app") version "1.0.0"
+    id("io.github.a-manumohan.interview-app") version "1.0.0"
 }
 
 android {
@@ -71,7 +71,7 @@ interviewApp {
 
 ```kotlin
 plugins {
-    id("io.github.manu.interview-feature") version "1.0.0"
+    id("io.github.a-manumohan.interview-feature") version "1.0.0"
 }
 
 android {
