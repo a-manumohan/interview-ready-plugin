@@ -1,5 +1,7 @@
 # interview-ready-plugin
 
+![Build](https://github.com/a-manumohan/interview-ready-plugin/actions/workflows/publish.yml/badge.svg)
+
 Two Gradle plugins that wire up a full Android interview stack in seconds — one for the app module, one for feature modules.
 
 ## Plugins
