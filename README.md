@@ -1,8 +1,17 @@
 # interview-ready-plugin
 
-One-line Gradle plugin that wires up a full Android interview stack in seconds.
+Two Gradle plugins that wire up a full Android interview stack in seconds — one for the app module, one for feature modules.
 
-## What you get
+## Plugins
+
+| Plugin ID | Apply to |
+|---|---|
+| `io.github.manu.interview-app` | The single `:app` module |
+| `io.github.manu.interview-feature` | Any `:feature-*` library module |
+
+---
+
+## `interview-app` — What you get
 
 Applying this plugin gives you **all** of the following, pre-configured and version-aligned:
 
@@ -21,6 +30,7 @@ Applying this plugin gives you **all** of the following, pre-configured and vers
 
 ### 1. In your project's `settings.gradle.kts`
 
+
 ```kotlin
 pluginManagement {
     repositories {
@@ -31,7 +41,7 @@ pluginManagement {
 }
 ```
 
-### 2. In your app module's `build.gradle.kts`
+### 2. App module `build.gradle.kts`
 
 ```kotlin
 plugins {
@@ -57,7 +67,32 @@ interviewApp {
 }
 ```
 
-### 3. Start coding
+### 3. Feature module `build.gradle.kts`
+
+```kotlin
+plugins {
+    id("io.github.manu.interview-feature") version "1.0.0"
+}
+
+android {
+    namespace = "com.example.myapp.feature.login"
+}
+
+// Optionally customize:
+interviewFeature {
+    compileSdk = 35
+    minSdk = 26
+
+    enableCompose = true         // true by default; set false for data/domain-only modules
+    enableKotlinInject = true    // true by default
+    enableKtor = true            // opt-in: add Ktor networking
+    enableRetrofit = false       // opt-in: add Retrofit stack
+    enableRoom = false           // opt-in: add Room
+    enableCoil = false           // opt-in: add Coil
+}
+```
+
+### 4. Start coding
 
 No version catalog to copy, no dependency blocks to write. Open your Activity/Composable and go.
 
@@ -79,7 +114,9 @@ All versions live in a single file:
 
 Change a version there → publish a new plugin version → all consuming projects get the update on next sync.
 
-## Plugin DSL extension
+## DSL reference
+
+### `interviewApp { }`
 
 | Property | Default | Description |
 |---|---|---|
@@ -91,3 +128,16 @@ Change a version there → publish a new plugin version → all consuming projec
 | `enableKtor` | `true` | Ktor Client (OkHttp engine) + content negotiation |
 | `enableRoom` | `true` | Room runtime + KTX + KSP compiler |
 | `enableCoil` | `true` | Coil 3 Compose + OkHttp backend |
+
+### `interviewFeature { }`
+
+| Property | Default | Description |
+|---|---|---|
+| `compileSdk` | `35` | Android compile SDK |
+| `minSdk` | `26` | Android min SDK |
+| `enableCompose` | `true` | Compose BOM, Material 3, Navigation Compose, UI tooling |
+| `enableKotlinInject` | `true` | kotlin-inject runtime + KSP compiler |
+| `enableRetrofit` | `false` | Retrofit 3 + OkHttp + Moshi + codegen |
+| `enableKtor` | `false` | Ktor Client (OkHttp engine) + content negotiation |
+| `enableRoom` | `false` | Room runtime + KTX + KSP compiler |
+| `enableCoil` | `false` | Coil 3 Compose + OkHttp backend |

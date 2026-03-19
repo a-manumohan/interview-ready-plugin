@@ -31,5 +31,12 @@ gradlePlugin {
             tags = listOf("android", "compose", "interview", "scaffold", "kotlin")
             implementationClass = "com.manu.interview.InterviewAppPlugin"
         }
+        create("interviewFeature") {
+            id = "io.github.manu.interview-feature"
+            displayName = "Interview-Ready Android Feature Module Plugin"
+            description = "One-line Gradle plugin that configures an Android library module with Compose, kotlin-inject, Navigation, and Coroutines for rapid feature module scaffolding."
+            tags = listOf("android", "compose", "interview", "feature", "library", "kotlin")
+            implementationClass = "com.manu.interview.InterviewFeaturePlugin"
+        }
     }
 }
