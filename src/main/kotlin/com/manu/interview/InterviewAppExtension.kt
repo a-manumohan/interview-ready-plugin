@@ -13,6 +13,7 @@ abstract class InterviewAppExtension @Inject constructor(objects: ObjectFactory)
 
     /** Toggle dependency groups — all enabled by default */
     val enableKotlinInject: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
+    val enableMetro: Property<Boolean> = objects.property(Boolean::class.java).convention(false)
     val enableRetrofit: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
     val enableKtor: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
     val enableRoom: Property<Boolean> = objects.property(Boolean::class.java).convention(true)

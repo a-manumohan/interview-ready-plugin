@@ -23,6 +23,9 @@ object Versions {
     // DI — kotlin-inject
     const val KOTLIN_INJECT = "0.9.0"
 
+    // DI — Metro
+    const val METRO = "0.10.2"
+
     // Networking — Retrofit stack
     const val RETROFIT = "3.0.0"
     const val MOSHI = "1.15.2"
