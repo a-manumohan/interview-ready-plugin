@@ -22,6 +22,9 @@ class InterviewFeaturePlugin : Plugin<Project> {
                 if (ext.enableCompose.get()) {
                     pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
                 }
+                if (ext.enableMetro.get()) {
+                    pluginManager.apply("dev.zacsweers.metro")
+                }
                 configureAndroid(ext)
                 configureDependencies(ext)
             }

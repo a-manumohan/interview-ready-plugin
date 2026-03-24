@@ -21,6 +21,9 @@ class InterviewAppPlugin : Plugin<Project> {
             pluginManager.apply("com.google.devtools.ksp")
 
             afterEvaluate {
+                if (ext.enableMetro.get()) {
+                    pluginManager.apply("dev.zacsweers.metro")
+                }
                 configureAndroid(ext)
                 configureDependencies(ext)
             }
