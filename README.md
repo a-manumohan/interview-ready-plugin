@@ -47,26 +47,25 @@ pluginManagement {
 
 ```kotlin
 plugins {
-    id("io.github.a-manumohan.interview-app") version "1.0.2"
+    id("io.github.a-manumohan.interview-app") version "1.0.6"
 }
 
 android {
     namespace = "com.example.myapp"
+    // Set SDK versions here — the plugin applies sensible defaults (compileSdk/targetSdk 35, minSdk 26)
+    // which you can override directly in this block if needed.
 }
 
 // That's it. All dependencies are applied.
 // Optionally customize:
 interviewApp {
-    compileSdk = 35
-    minSdk = 26
-
     // Toggle off what you don't need:
-    enableRetrofit = false   // skip Retrofit stack
-    enableKtor = false       // skip Ktor stack
-    enableRoom = false       // skip Room
-    enableCoil = false       // skip Coil
+    enableRetrofit = false     // skip Retrofit stack
+    enableKtor = false         // skip Ktor stack
+    enableRoom = false         // skip Room
+    enableCoil = false         // skip Coil
     enableKotlinInject = false // skip kotlin-inject
-    enableMetro = true       // opt-in: use Metro DI instead of kotlin-inject
+    enableMetro = true         // opt-in: use Metro DI instead of kotlin-inject
 }
 ```
 
@@ -74,19 +73,20 @@ interviewApp {
 
 ```kotlin
 plugins {
-    id("io.github.a-manumohan.interview-feature") version "1.0.2"
+    id("io.github.a-manumohan.interview-feature") version "1.0.6"
 }
 
 android {
     namespace = "com.example.myapp.feature.login"
+    // Override SDK versions here if needed.
 }
 
 // Optionally customize:
 interviewFeature {
-    compileSdk = 35
-    minSdk = 26
-
-    enableCompose = true         // true by default; set false for data/domain-only modules
+    // enableCompose controls Compose dependencies only.
+    // buildFeatures.compose is always enabled; to also disable it for a
+    // data/domain module, add: android { buildFeatures { compose = false } }
+    enableCompose = false        // opt-out: skip Compose dependencies
     enableKotlinInject = true    // true by default
     enableMetro = false          // opt-in: use Metro DI instead of kotlin-inject
     enableKtor = true            // opt-in: add Ktor networking
@@ -102,14 +102,13 @@ No version catalog to copy, no dependency blocks to write. Open your Activity/Co
 
 ## Publishing to Gradle Plugin Portal
 
-```bash
-# First time: get your API key from https://plugins.gradle.org
-# Put credentials in ~/.gradle/gradle.properties:
-#   gradle.publish.key=YOUR_KEY
-#   gradle.publish.secret=YOUR_SECRET
+Publishing is triggered automatically by pushing a version tag:
 
-./gradlew publishPlugins
+```bash
+git tag v1.x.x && git push origin v1.x.x
 ```
+
+The GitHub Action will run `./gradlew publishPlugins` using the stored `GRADLE_PUBLISH_KEY` / `GRADLE_PUBLISH_SECRET` secrets.
 
 ## Updating versions
 
@@ -124,9 +123,6 @@ Change a version there → publish a new plugin version → all consuming projec
 
 | Property | Default | Description |
 |---|---|---|
-| `compileSdk` | `35` | Android compile SDK |
-| `minSdk` | `26` | Android min SDK |
-| `targetSdk` | `35` | Android target SDK |
 | `enableKotlinInject` | `true` | kotlin-inject runtime + KSP compiler |
 | `enableMetro` | `false` | Metro DI plugin + KSP compiler (opt-in alternative to kotlin-inject) |
 | `enableRetrofit` | `true` | Retrofit 3 + OkHttp + Moshi + codegen |
@@ -134,16 +130,18 @@ Change a version there → publish a new plugin version → all consuming projec
 | `enableRoom` | `true` | Room runtime + KTX + KSP compiler |
 | `enableCoil` | `true` | Coil 3 Compose + OkHttp backend |
 
+> SDK versions (`compileSdk` 35, `minSdk` 26, `targetSdk` 35) are applied as defaults. Override them in your `android { }` block if needed.
+
 ### `interviewFeature { }`
 
 | Property | Default | Description |
 |---|---|---|
-| `compileSdk` | `35` | Android compile SDK |
-| `minSdk` | `26` | Android min SDK |
-| `enableCompose` | `true` | Compose BOM, Material 3, Navigation Compose, UI tooling |
+| `enableCompose` | `true` | Compose BOM, Material 3, Navigation Compose, UI tooling. Note: `buildFeatures.compose` is always enabled by the plugin; set `android { buildFeatures { compose = false } }` in addition if you need to fully disable it. |
 | `enableKotlinInject` | `true` | kotlin-inject runtime + KSP compiler |
 | `enableMetro` | `false` | Metro DI plugin + KSP compiler (opt-in alternative to kotlin-inject) |
 | `enableRetrofit` | `false` | Retrofit 3 + OkHttp + Moshi + codegen |
 | `enableKtor` | `false` | Ktor Client (OkHttp engine) + content negotiation |
 | `enableRoom` | `false` | Room runtime + KTX + KSP compiler |
 | `enableCoil` | `false` | Coil 3 Compose + OkHttp backend |
+
+> SDK versions (`compileSdk` 35, `minSdk` 26) are applied as defaults. Override them in your `android { }` block if needed.
