@@ -15,10 +15,18 @@ class InterviewAppPlugin : Plugin<Project> {
             val ext = extensions.create("interviewApp", InterviewAppExtension::class.java)
 
             pluginManager.apply("com.android.application")
-            pluginManager.apply("org.jetbrains.kotlin.android")
-            pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
-            pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
-            pluginManager.apply("com.google.devtools.ksp")
+            if (!pluginManager.hasPlugin("org.jetbrains.kotlin.android")) {
+                pluginManager.apply("org.jetbrains.kotlin.android")
+            }
+            if (!pluginManager.hasPlugin("org.jetbrains.kotlin.plugin.compose")) {
+                pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
+            }
+            if (!pluginManager.hasPlugin("org.jetbrains.kotlin.plugin.serialization")) {
+                pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
+            }
+            if (!pluginManager.hasPlugin("com.google.devtools.ksp")) {
+                pluginManager.apply("com.google.devtools.ksp")
+            }
 
             afterEvaluate {
                 if (ext.enableMetro.get()) {

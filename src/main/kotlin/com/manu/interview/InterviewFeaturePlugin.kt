@@ -14,9 +14,15 @@ class InterviewFeaturePlugin : Plugin<Project> {
             val ext = extensions.create("interviewFeature", InterviewFeatureExtension::class.java)
 
             pluginManager.apply("com.android.library")
-            pluginManager.apply("org.jetbrains.kotlin.android")
-            pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
-            pluginManager.apply("com.google.devtools.ksp")
+            if (!pluginManager.hasPlugin("org.jetbrains.kotlin.android")) {
+                pluginManager.apply("org.jetbrains.kotlin.android")
+            }
+            if (!pluginManager.hasPlugin("org.jetbrains.kotlin.plugin.serialization")) {
+                pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
+            }
+            if (!pluginManager.hasPlugin("com.google.devtools.ksp")) {
+                pluginManager.apply("com.google.devtools.ksp")
+            }
 
             afterEvaluate {
                 if (ext.enableCompose.get()) {
