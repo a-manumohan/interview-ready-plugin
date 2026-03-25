@@ -20,7 +20,7 @@ Applying this plugin gives you **all** of the following, pre-configured and vers
 | Category | Libraries |
 |---|---|
 | **UI** | Jetpack Compose (via BOM), Material 3, Navigation Compose |
-| **DI** | kotlin-inject + KSP code gen |
+| **DI** | kotlin-inject + KSP code gen *(or Metro — opt-in)* |
 | **Networking** | Retrofit 3 + OkHttp + Moshi **and** Ktor Client + KotlinX Serialization |
 | **Persistence** | Room + KSP |
 | **Images** | Coil 3 (Compose + OkHttp) |
@@ -47,7 +47,7 @@ pluginManagement {
 
 ```kotlin
 plugins {
-    id("io.github.a-manumohan.interview-app") version "1.0.0"
+    id("io.github.a-manumohan.interview-app") version "1.0.2"
 }
 
 android {
@@ -66,6 +66,7 @@ interviewApp {
     enableRoom = false       // skip Room
     enableCoil = false       // skip Coil
     enableKotlinInject = false // skip kotlin-inject
+    enableMetro = true       // opt-in: use Metro DI instead of kotlin-inject
 }
 ```
 
@@ -73,7 +74,7 @@ interviewApp {
 
 ```kotlin
 plugins {
-    id("io.github.a-manumohan.interview-feature") version "1.0.0"
+    id("io.github.a-manumohan.interview-feature") version "1.0.2"
 }
 
 android {
@@ -87,6 +88,7 @@ interviewFeature {
 
     enableCompose = true         // true by default; set false for data/domain-only modules
     enableKotlinInject = true    // true by default
+    enableMetro = false          // opt-in: use Metro DI instead of kotlin-inject
     enableKtor = true            // opt-in: add Ktor networking
     enableRetrofit = false       // opt-in: add Retrofit stack
     enableRoom = false           // opt-in: add Room
@@ -126,6 +128,7 @@ Change a version there → publish a new plugin version → all consuming projec
 | `minSdk` | `26` | Android min SDK |
 | `targetSdk` | `35` | Android target SDK |
 | `enableKotlinInject` | `true` | kotlin-inject runtime + KSP compiler |
+| `enableMetro` | `false` | Metro DI plugin + KSP compiler (opt-in alternative to kotlin-inject) |
 | `enableRetrofit` | `true` | Retrofit 3 + OkHttp + Moshi + codegen |
 | `enableKtor` | `true` | Ktor Client (OkHttp engine) + content negotiation |
 | `enableRoom` | `true` | Room runtime + KTX + KSP compiler |
@@ -139,6 +142,7 @@ Change a version there → publish a new plugin version → all consuming projec
 | `minSdk` | `26` | Android min SDK |
 | `enableCompose` | `true` | Compose BOM, Material 3, Navigation Compose, UI tooling |
 | `enableKotlinInject` | `true` | kotlin-inject runtime + KSP compiler |
+| `enableMetro` | `false` | Metro DI plugin + KSP compiler (opt-in alternative to kotlin-inject) |
 | `enableRetrofit` | `false` | Retrofit 3 + OkHttp + Moshi + codegen |
 | `enableKtor` | `false` | Ktor Client (OkHttp engine) + content negotiation |
 | `enableRoom` | `false` | Room runtime + KTX + KSP compiler |
