@@ -100,16 +100,6 @@ interviewFeature {
 
 No version catalog to copy, no dependency blocks to write. Open your Activity/Composable and go.
 
-## Publishing to Gradle Plugin Portal
-
-Publishing is triggered automatically by pushing a version tag:
-
-```bash
-git tag v1.x.x && git push origin v1.x.x
-```
-
-The GitHub Action will run `./gradlew publishPlugins` using the stored `GRADLE_PUBLISH_KEY` / `GRADLE_PUBLISH_SECRET` secrets.
-
 ## Updating versions
 
 All versions live in a single file:
