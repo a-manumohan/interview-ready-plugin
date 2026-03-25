@@ -114,7 +114,7 @@ Change a version there → publish a new plugin version → all consuming projec
 | Property | Default | Description |
 |---|---|---|
 | `enableKotlinInject` | `true` | kotlin-inject runtime + KSP compiler |
-| `enableMetro` | `false` | Metro DI plugin + KSP compiler (opt-in alternative to kotlin-inject) |
+| `enableMetro` | `false` | Metro DI Kotlin compiler plugin (opt-in alternative to kotlin-inject) |
 | `enableRetrofit` | `true` | Retrofit 3 + OkHttp + Moshi + codegen |
 | `enableKtor` | `true` | Ktor Client (OkHttp engine) + content negotiation |
 | `enableRoom` | `true` | Room runtime + KTX + KSP compiler |
@@ -128,7 +128,7 @@ Change a version there → publish a new plugin version → all consuming projec
 |---|---|---|
 | `enableCompose` | `true` | Compose BOM, Material 3, Navigation Compose, UI tooling. Note: `buildFeatures.compose` is always enabled by the plugin; set `android { buildFeatures { compose = false } }` in addition if you need to fully disable it. |
 | `enableKotlinInject` | `true` | kotlin-inject runtime + KSP compiler |
-| `enableMetro` | `false` | Metro DI plugin + KSP compiler (opt-in alternative to kotlin-inject) |
+| `enableMetro` | `false` | Metro DI Kotlin compiler plugin (opt-in alternative to kotlin-inject) |
 | `enableRetrofit` | `false` | Retrofit 3 + OkHttp + Moshi + codegen |
 | `enableKtor` | `false` | Ktor Client (OkHttp engine) + content negotiation |
 | `enableRoom` | `false` | Room runtime + KTX + KSP compiler |
