@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "io.github.a-manumohan"
-version = "1.0.6"
+version = "1.0.7"
 
 repositories {
     gradlePluginPortal()
@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     // These are needed so the convention plugin can apply AGP + Kotlin + KSP + Metro plugins
-    implementation("com.android.tools.build:gradle:8.8.2")
+    implementation("com.android.tools.build:gradle:8.9.1")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.20")
     implementation("org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.3.20")
     implementation("org.jetbrains.kotlin:kotlin-serialization:2.3.20")
