@@ -1,9 +1,10 @@
 package com.manu.interview
 
 import com.android.build.api.dsl.LibraryExtension
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.kotlin.dsl.*
 
 @Suppress("UnstableApiUsage")
@@ -43,14 +44,15 @@ class InterviewFeaturePlugin : Plugin<Project> {
     }
 
     private fun Project.configureAndroid(ext: InterviewFeatureExtension) {
+        extensions.configure<JavaPluginExtension> {
+            toolchain {
+                languageVersion.set(JavaLanguageVersion.of(21))
+            }
+        }
         extensions.configure<LibraryExtension> {
             compileSdk = ext.compileSdk.get()
             defaultConfig {
                 minSdk = ext.minSdk.get()
-            }
-            compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_17
-                targetCompatibility = JavaVersion.VERSION_17
             }
             buildFeatures {
                 compose = ext.enableCompose.get()
