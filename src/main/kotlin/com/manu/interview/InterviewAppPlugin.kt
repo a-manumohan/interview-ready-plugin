@@ -28,11 +28,14 @@ class InterviewAppPlugin : Plugin<Project> {
                 pluginManager.apply("com.google.devtools.ksp")
             }
 
+            // Configure Android immediately — AGP 8.x finalises compileSdk/buildFeatures
+            // during evaluation, before afterEvaluate blocks run.
+            configureAndroid(ext)
+
             afterEvaluate {
                 if (ext.enableMetro.get()) {
                     pluginManager.apply("dev.zacsweers.metro")
                 }
-                configureAndroid(ext)
                 configureDependencies(ext)
             }
         }

@@ -17,6 +17,11 @@ class InterviewFeaturePlugin : Plugin<Project> {
             if (!pluginManager.hasPlugin("org.jetbrains.kotlin.android")) {
                 pluginManager.apply("org.jetbrains.kotlin.android")
             }
+            // Apply compose compiler plugin eagerly — KGP finalises compiler task
+            // configuration before afterEvaluate, so it must be present now.
+            if (!pluginManager.hasPlugin("org.jetbrains.kotlin.plugin.compose")) {
+                pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
+            }
             if (!pluginManager.hasPlugin("org.jetbrains.kotlin.plugin.serialization")) {
                 pluginManager.apply("org.jetbrains.kotlin.plugin.serialization")
             }
@@ -24,14 +29,14 @@ class InterviewFeaturePlugin : Plugin<Project> {
                 pluginManager.apply("com.google.devtools.ksp")
             }
 
+            // Configure Android immediately — AGP 8.x finalises compileSdk/buildFeatures
+            // during evaluation, before afterEvaluate blocks run.
+            configureAndroid(ext)
+
             afterEvaluate {
-                if (ext.enableCompose.get()) {
-                    pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
-                }
                 if (ext.enableMetro.get()) {
                     pluginManager.apply("dev.zacsweers.metro")
                 }
-                configureAndroid(ext)
                 configureDependencies(ext)
             }
         }
